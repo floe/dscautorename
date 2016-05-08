@@ -40,6 +40,7 @@ import ro.ciubex.dscautorename.util.Utilities;
 import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -379,6 +380,7 @@ public class RenameFileAsyncTask extends AsyncTask<Void, Void, Integer> {
 						data.getFullPath(), oldFileName, data.getFileTitle(),
 						data.getFileName(), data.getSize());
 				data.setParentFolder(newFile.getParentFile());
+				mApplication.sendBroadcast(new Intent("android.hardware.action.NEW_PICTURE", data.getUri()));
 				renameZeroFile(data);
 			} else {
 				mApplication.logE(TAG, "Unable to rename: " + data);
